@@ -25,6 +25,8 @@ import { CacheProvider } from "@emotion/react";
 import { useState } from "react";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import AuthInitializer from "./components/core-module/auth-initializer/AuthInitializer";
+
 const App: React.FC = (): JSX.Element => {
   const isArabic = (lang: string) => ['ar', 'ar-SA'].includes(lang);
   const [isRtl, setIsRtl] = useState(false);
@@ -45,10 +47,14 @@ const App: React.FC = (): JSX.Element => {
       <div>
         {isRtl ? (
           <CacheProvider value={rtlCache}>
-            <Router />
+            <AuthInitializer>
+              <Router />
+            </AuthInitializer>
           </CacheProvider>
         ) : (
-          <Router />
+          <AuthInitializer>
+            <Router />
+          </AuthInitializer>
         )}
       </div>
     </LocalizationProvider>

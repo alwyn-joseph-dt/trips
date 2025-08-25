@@ -70,25 +70,81 @@ export const extractAuthTokenFromURL = (): string | null => {
  */
 export const extractAuthDataFromURL = (): DecodedAuthData | null => {
   try {
+    console.log('🔍 Extracting auth data from URL...');
     const urlParams = new URLSearchParams(window.location.search);
     const authParam = urlParams.get('auth');
+    
+    console.log('🔑 Auth param found:', !!authParam);
+    if (authParam) {
+      console.log('🔑 Auth param length:', authParam.length);
+      console.log('🔑 Auth param preview:', authParam.substring(0, 50) + '...');
+    }
     
     if (!authParam) {
       return null;
     }
 
-    // Decode the base64 encoded auth data
-    const decodedString = atob(authParam);
-    const authData: DecodedAuthData = JSON.parse(decodedString);
-
-    // Validate required fields
-    if (!authData.accessToken || !authData.consumerKey || !authData.consumerSecret) {
-      console.error('Missing required authentication parameters');
-      return null;
+    // Try to decode as JWT token first (your auth token appears to be JWT)
+    try {
+      console.log('🔐 Attempting JWT decode...');
+      // JWT tokens have 3 parts separated by dots
+      const parts = authParam.split('.');
+      console.log('🔐 JWT parts count:', parts.length);
+      
+      if (parts.length === 3) {
+        console.log('🔐 JWT structure looks correct, decoding payload...');
+        // Decode the payload part (second part)
+        const payload = parts[1];
+        console.log('🔐 Payload part length:', payload.length);
+        
+        // Add padding if needed for base64
+        const paddedPayload = payload + '='.repeat((4 - payload.length % 4) % 4);
+        const decodedString = atob(paddedPayload.replace(/-/g, '+').replace(/_/g, '/'));
+        console.log('🔐 Decoded payload:', decodedString);
+        
+        const authData: DecodedAuthData = JSON.parse(decodedString);
+        console.log('🔐 Parsed auth data keys:', Object.keys(authData));
+        
+        // Validate required fields
+        if (!authData.accessToken || !authData.consumerKey || !authData.consumerSecret) {
+          console.error('Missing required authentication parameters in JWT payload');
+          console.error('Available keys:', Object.keys(authData));
+          return null;
+        }
+        
+        console.log('✅ JWT decode successful');
+        return authData;
+      } else {
+        console.log('🔐 Not a valid JWT structure (expected 3 parts)');
+      }
+    } catch (jwtError) {
+      console.log('❌ JWT decode failed:', jwtError);
+      console.log('🔐 Not a JWT token, trying base64 decode...');
     }
 
+    // Fallback: try base64 decode (for backward compatibility)
+    try {
+      console.log('🔐 Attempting base64 decode...');
+      const decodedString = atob(authParam);
+      console.log('🔐 Base64 decoded string:', decodedString);
+      
+      const authData: DecodedAuthData = JSON.parse(decodedString);
+      console.log('🔐 Base64 parsed auth data keys:', Object.keys(authData));
 
-    return authData;
+      // Validate required fields
+      if (!authData.accessToken || !authData.consumerKey || !authData.consumerSecret) {
+        console.error('Missing required authentication parameters');
+        console.error('Available keys:', Object.keys(authData));
+        return null;
+      }
+
+      console.log('✅ Base64 decode successful');
+      return authData;
+    } catch (base64Error) {
+      console.error('❌ Failed to decode as base64:', base64Error);
+    }
+
+    return null;
   } catch (error) {
     console.error('Failed to extract auth data from URL:', error);
     return null;
@@ -150,7 +206,6 @@ export const initializeAuthState = (authData: DecodedAuthData, authToken:string 
       hasTokenObj: !!updatedState.loginSlice?.tokenObj,
       tokenStructure: (updatedState.loginSlice?.token as Record<string, unknown>)?.Response?.Auth1dot0,
       tokenObjStructure: (updatedState.loginSlice?.tokenObj as Record<string, unknown>)?.Response?.Auth1dot0
-      ,
     });
 
     // Set cookies for compatibility with existing code
@@ -207,24 +262,45 @@ export const clearAuthFromURL = (): void => {
  */
 export const isUserAuthenticated = (): boolean => {
   try {
+    console.log('🔍 Checking if user is authenticated...');
+    
     // Check Redux state first
     const reduxState = store.getState();
     const hasReduxAuth = reduxState.loginSlice?.token?.Response?.Auth1dot0?.AccessToken;
+    
+    console.log('🔍 Redux auth check:', {
+      hasLoginSlice: !!reduxState.loginSlice,
+      hasToken: !!reduxState.loginSlice?.token,
+      hasResponse: !!reduxState.loginSlice?.token?.Response,
+      hasAuth1dot0: !!reduxState.loginSlice?.token?.Response?.Auth1dot0,
+      hasAccessToken: !!reduxState.loginSlice?.token?.Response?.Auth1dot0?.AccessToken
+    });
 
     if (hasReduxAuth) {
+      console.log('✅ User authenticated via Redux state');
       return true;
     }
 
+    console.log('🔍 Redux auth failed, checking cookies...');
+    
     // Fallback to cookie check
     const cookieToken = Cookies.get('jeetat');
     if (cookieToken) {
+      console.log('🔍 Found jeetat cookie');
       const parsedToken = JSON.parse(cookieToken);
-      return !!parsedToken?.token;
+      const hasToken = !!parsedToken?.token;
+      console.log('🔍 Cookie token check:', hasToken);
+      return hasToken;
     }
+    
     // if token find from cookie then put in redux loginSlice
     const cookieAuthToken = Cookies.get('jeetst');
-    if(cookieAuthToken) store.dispatch(setAuthShareToken(cookieAuthToken))
+    if(cookieAuthToken) {
+      console.log('🔍 Found jeetst cookie, dispatching to Redux');
+      store.dispatch(setAuthShareToken(cookieAuthToken));
+    }
 
+    console.log('❌ No authentication found in Redux or cookies');
     return false;
   } catch (error) {
     console.error('Error checking authentication status:', error);
@@ -237,27 +313,40 @@ export const isUserAuthenticated = (): boolean => {
  */
 export const handleAuthInitialization = (): boolean => {
   try {
+    console.log('🔐 Starting auth initialization...');
+    console.log('🔍 Current URL:', window.location.href);
+    
     // Extract auth data from URL
     const authData = extractAuthDataFromURL();
     const authToken = extractAuthTokenFromURL();
     
+    console.log('📋 Extracted auth data:', authData ? 'Found' : 'Not found');
+    console.log('🔑 Extracted auth token:', authToken ? 'Found' : 'Not found');
+    
     if (!authData) {
+      console.log('❌ No auth data in URL, checking if user is already authenticated...');
       // No auth data in URL, check if user is already authenticated
       if (isUserAuthenticated()) {
+        console.log('✅ User already authenticated');
         return true;
       }
+      console.log('❌ User not authenticated');
       return false;
     }
 
+    console.log('✅ Auth data found, initializing auth state...');
+    
     // Initialize auth state
     const success = initializeAuthState(authData, authToken);
     
     if (success) {
+      console.log('✅ Auth state initialized successfully, clearing URL...');
       // Clear auth data from URL
       clearAuthFromURL();
       return true;
     }
 
+    console.log('❌ Failed to initialize auth state');
     return false;
   } catch (error) {
     console.error('Failed to handle auth initialization:', error);

@@ -11,7 +11,7 @@ const AuthInitializer: React.FC<AuthInitializerProps> = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const initializeAuth = async () => {
+    const initializeAuth = () => {
       try {
         setIsLoading(true);
         
