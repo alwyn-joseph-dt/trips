@@ -11,7 +11,8 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
     // Base path for production build - adjust this based on your ALB path configuration
-    base: mode === 'production' ? '/trips/' : '/',
+    // Commented out for Vercel deployment - app will be served from root
+    // base: mode === 'production' ? '/trips/' : '/',
     define: {
       global: 'globalThis',
       __APP_ENV__: JSON.stringify(env.REACT_APP_ENV || env.VITE_APP_ENV),

@@ -1,0 +1,20 @@
+{
+    "rewrites": [
+      {
+        "source": "/trips/(.*)",
+        "destination": "/$1"
+      }
+    ],
+    "headers": [
+      {
+        "source": "/trips/(.*)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=31536000, immutable"
+          }
+        ]
+      }
+    ]
+  }
+  
