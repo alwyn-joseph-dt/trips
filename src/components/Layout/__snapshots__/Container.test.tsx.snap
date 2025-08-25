@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Container Component applies padding (desktop view) 1`] = `
+<div
+  class="MuiBox-root css-1ddggyt"
+>
+  Desktop
+</div>
+`;
+
+exports[`Container Component removes padding on mobile view 1`] = `
+<div
+  class="MuiBox-root css-l3s00c"
+>
+  Mobile
+</div>
+`;

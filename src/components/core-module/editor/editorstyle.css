@@ -1,0 +1,31 @@
+.custom-quill-wrapper {
+  width: 94%;
+  border: 1px solid #EBEBEB;
+  border-radius: 20px;
+  overflow: hidden;
+  /* ensures inner content fits rounded corners */
+}
+
+.custom-quill-editor .ql-toolbar {
+  border: none;
+  padding: 20px;
+  height: 54px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #EBEBEB;
+  display: "flex";
+}
+
+.custom-quill-editor .ql-container {
+  height: 400px;
+  /* customize height */
+  border: none;
+  font-family: 'Arial', sans-serif;
+}
+
+.ql-editor.ql-blank::before {
+  color: #BEBEBE;
+  font-weight: 400;
+  font-size: 12px;
+  font-style: normal;
+  font-family: 'Poppins', sans-serif;
+}

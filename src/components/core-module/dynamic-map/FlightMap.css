@@ -1,0 +1,40 @@
+.custom-circle-icon {
+  width: 5px;
+  height: 20px;
+  background-color: white;
+  /* Circle color */
+  border-radius: 50%;
+  /* Make it round */
+  border: 2px solid black;
+  /* Border color */
+}
+
+
+.custom-flight-icon img {
+  width: 15px !important;
+  height: 15px !important;
+  object-fit: contain;
+  transform: rotate(90deg);
+}
+
+.custom-circle-icon2 {
+  width: 3px;
+  height: 16px;
+  background-color: #0087FA;
+  border-radius: 50%;
+}
+
+.custom-circle-icon3 {
+  width: 3px;
+  height: 16px;
+  background-color: #0087FA;
+  border-radius: 50%;
+  border: 1.5px solid #FFFFFF;
+}
+
+.custom-circle-icon-large {
+  width: 3px;
+  height: 16px;
+  background-color: #0087FA3B;
+  border-radius: 50%;
+}

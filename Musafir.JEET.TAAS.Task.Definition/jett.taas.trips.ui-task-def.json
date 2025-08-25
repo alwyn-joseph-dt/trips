@@ -1,0 +1,31 @@
+{
+  "family": "mbiz-jett-ui-trips",
+  "networkMode": "awsvpc",
+  "executionRoleArn": "arn:aws:iam::713881790687:role/mbiz-ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "name": "mbiz-jett-ui-trips-container",
+      "image": "<IMAGE_URI>",
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true,
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/mbiz-jett-ui-trips",
+          "awslogs-region": "ap-south-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ],
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "256",
+  "memory": "512"
+}
+
+

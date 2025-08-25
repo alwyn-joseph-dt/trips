@@ -1,0 +1,397 @@
+/* ===============================
+   Variables
+   =============================== */
+$color-dark: #2a2a2a;
+$color-primary: #0087FA;
+$color-grey-light: #ccc;
+$color-grey-border: #ddd;
+$color-grey-text: #A2A2A2;
+$color-grey-dark: #666;
+
+$font-size-xs: 10px;
+$font-size-sm: 12px;
+$font-size-md: 14px;
+$font-weight-normal: 400;
+$font-weight-semi: 550;
+$font-weight-bold: 600;
+@use "sass:color";
+
+/* ===============================
+   Breadcrumb Component Styles
+   =============================== */
+.breadcrumbs {
+    font: {
+        weight: $font-weight-normal !important;
+        style: normal !important;
+        size: $font-size-sm !important;
+    }
+
+    line-height: 100% !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+
+    @media (max-width: 600px) {
+        font-size: 0.8rem !important;
+    }
+
+    @media (min-width: 600px) and (max-width: 960px) {
+        font-size: 0.9rem !important;
+    }
+}
+
+.breadcrumbLink,
+.breadcrumbText {
+    color: $color-dark !important;
+}
+
+.breadcrumbLink {
+    text-decoration: none !important;
+
+    &:hover {
+        text-decoration: underline !important;
+    }
+}
+
+/* ===============================
+   Status and Actions Component Styles
+   =============================== */
+.statusaction_container {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    padding: 0;
+    margin-bottom: 16px !important;
+
+    &::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $color-grey-light;
+        border-radius: 3px;
+    }
+}
+
+.statusaction_filterButton {
+    text-transform: none !important;
+    background-color: #fff !important;
+    border-color: $color-grey-border !important;
+    color: $color-grey-text !important;
+    min-width: 75px !important;
+    height: 32px !important;
+    font-size: $font-size-sm !important;
+    font-weight: $font-weight-normal !important;
+    flex-shrink: 0 !important;
+    padding: 0 12px !important;
+}
+
+.statusaction_mobileFont {
+    font-size: $font-size-xs !important;
+}
+
+.statusaction_filterIcon {
+    width: 14px !important;
+    height: 14px !important;
+    display: flex !important;
+    align-items: center !important;
+    margin-right: 4px !important;
+}
+
+.statusaction_dropdownIcon {
+    color: $color-grey-dark !important;
+}
+
+.statusaction_actions {
+    svg {
+        flex-shrink: 0 !important;
+        margin-left: auto !important;
+        color: $color-primary !important;
+        fill: $color-primary !important;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.statusaction_actionButton {
+    background-color: #f5f5f5 !important;
+    border: 1px solid $color-primary !important;
+    color: $color-primary !important;
+    font-weight: $font-weight-normal !important;
+    text-transform: none !important;
+    min-width: 60px !important;
+    font-size: $font-size-sm !important;
+    padding: 0 8px !important;
+    height: 36px !important;
+    flex-shrink: 0 !important;
+
+    &:hover {
+        background-color: #eaeaea !important;
+        border-color: $color-primary !important;
+        color: $color-primary !important;
+    }
+}
+
+.statusaction_disabledActionButton {
+    background-color: #e0e0e0 !important;
+    border: 1px solid #ccc !important;
+    color: #999 !important;
+    cursor: not-allowed !important;
+    opacity: 0.6 !important;
+}
+.statusaction_customMenu .MuiMenuItem-root {
+  font-size: 0.875rem !important;  
+}
+/* ===============================
+   Add and Edit Drawer Component Styles
+   =============================== */
+.addeditairportdrawer_drawerPaper {
+    width: 100% !important;
+
+    @media (min-width: 600px) {
+        width: 500px !important;
+    }
+}
+
+.addeditairportdrawer_drawerHeader {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 16px !important;
+}
+
+.addeditairportdrawer_drawerTitle {
+    font-weight: $font-weight-bold !important;
+    font-size: 22px !important;
+}
+
+.addeditairportdrawer_drawerFormContainer {
+    padding: 16px !important;
+    overflow-y: auto !important;
+    height: 100% !important;
+}
+
+.addeditairportdrawer_sectionTitle {
+    font-size: $font-size-md !important;
+    font-weight: $font-weight-semi !important;
+    margin-bottom: 16px !important;
+}
+
+.addeditairportdrawer_inputLabel,
+.addeditairportdrawer_inputLabelTopMargin {
+    font-size: $font-size-xs !important;
+    font-weight: $font-weight-normal !important;
+    margin-bottom: 4px !important;
+}
+
+.addeditairportdrawer_inputLabelTopMargin {
+    margin-top: 16px !important;
+}
+
+.addeditairportdrawer_inputRowTwo {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+
+    @media (min-width: 768px) {
+        flex-direction: row !important;
+
+        >.MuiTextField-root {
+            flex: 1 !important;
+        }
+    }
+}
+
+.addeditairportdrawer_textFieldSmall {
+    margin-bottom: 16px !important;
+
+    .MuiOutlinedInput-root {
+        height: 36px !important;
+        font-size: $font-size-xs !important;
+
+        fieldset {
+            border-color: #BFCBD9 !important;
+        }
+
+        &:hover fieldset {
+            border-color: #90CAF9 !important;
+        }
+
+        &.Mui-focused fieldset {
+            border-color: #1976D2 !important;
+        }
+    }
+
+    .MuiInputBase-input {
+        padding: 8px !important;
+    }
+
+    .MuiInputLabel-root {
+        top: -5px !important;
+        font-size: $font-size-xs !important;
+    }
+}
+
+.addeditairportdrawer_buttonGroup {
+    display: flex !important;
+    justify-content: flex-end !important;
+    gap: 16px !important;
+    margin-top: 24px !important;
+}
+
+.addeditairportdrawer_cancelButton {
+    width: 120px !important;
+    text-transform: none !important;
+    border-color: $color-primary !important;
+    color: $color-primary !important;
+    font-weight: $font-weight-bold !important;
+}
+
+.addeditairportdrawer_saveButton {
+    width: 140px !important;
+    text-transform: none !important;
+    background-color: $color-primary !important;
+    font-weight: $font-weight-bold !important;
+
+    &:hover {
+        background-color: color.adjust($color-primary, $lightness: -5%) !important;
+    }
+}
+
+/* ===============================
+   Search and Add Button Component Styles
+   =============================== */
+.searchandaddbutton_container {
+    margin-bottom: 16px !important;
+}
+
+.searchandaddbutton_heading {
+    font-size: 30px !important;
+    font-weight: $font-weight-bold !important;
+    margin: 16px 0 !important;
+}
+
+.searchandaddbutton_mobileHeading {
+    font-size: 18px !important;
+    font-weight: $font-weight-bold !important;
+    white-space: nowrap !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.searchandaddbutton_desktopSearchAdd {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-bottom: 16px !important;
+    width: 100% !important;
+    gap: 16px !important;
+}
+
+.searchandaddbutton_searchField {
+    width: 100% !important;
+    max-width: 578px !important;
+    border-radius: 5px !important;
+    flex-grow: 1 !important;
+
+    .MuiOutlinedInput-root {
+        border-radius: 5px !important;
+        background-color: #fff !important;
+        font-size: $font-size-sm !important;
+        font-weight: $font-weight-normal !important;
+        color: $color-grey-text;
+    }
+}
+
+.searchandaddbutton_button {
+    background-color: $color-primary !important;
+    text-transform: capitalize !important;
+    font-weight: $font-weight-normal !important;
+    font-size: 0.875rem !important;
+    border-radius: 6px !important;
+    color: #fff !important;
+    padding: 0 16px !important;
+    height: 40px !important;
+    white-space: nowrap !important;
+    margin-left: 440px !important;
+}
+
+.searchandaddbutton_mobileHeader {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-top: 16px !important;
+    width: 100% !important;
+}
+
+.searchandaddbutton_mobileOnly {
+    display: block !important;
+}
+
+.searchandaddbutton_mobileSearchField {
+    width: 100% !important;
+    border-radius: 5px !important;
+    bottom: 8px !important;
+
+    .MuiOutlinedInput-root {
+        border-radius: 5px !important;
+        background-color: #fff !important;
+        font-size: $font-size-sm !important;
+        font-weight: $font-weight-normal !important;
+    }
+}
+
+.searchandaddbutton_mobileButton {
+    height: 36px !important;
+    padding: 0 16px !important;
+    float: right !important;
+    bottom: 30px !important;
+    background-color: $color-primary !important;
+    text-transform: capitalize !important;
+}
+
+.searchandaddbutton_desktopOnly {
+    display: none !important;
+}
+
+@media (min-width: 900px) {
+    .searchandaddbutton_desktopOnly {
+        display: block !important;
+    }
+
+    .searchandaddbutton_mobileOnly {
+        display: none !important;
+    }
+}
+
+/* ===============================
+   Airport Data Table Styles
+   =============================== */
+.addairporttabledata_actionMenuWrapper {
+    display: flex;
+}
+
+.addairporttabledata_bottomBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+}
+
+.MuiTypography-root.MuiTypography-body2 {
+    color: $color-grey-text !important;
+}
+
+.MuiDataGrid-cell {
+    overflow: visible !important;
+}
+
+.MuiSwitch-root img {
+    display: block !important;
+    width: 22px !important;
+    height: 12px !important;
+}
