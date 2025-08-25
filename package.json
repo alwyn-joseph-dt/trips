@@ -57,7 +57,8 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,md}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,css,md}\"",
     "analyze": "npm run build && npx vite-bundle-analyzer dist",
-    "bundle-report": "npm run build && npx vite-bundle-analyzer dist --mode=static"
+    "bundle-report": "npm run build && npx vite-bundle-analyzer dist --mode=static",
+    "verify-deployment": "node scripts/verify-deployment.js"
   },
   "dependencies": {
     "@apollo/client": "^3.13.9",
