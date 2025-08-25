@@ -6,14 +6,14 @@ const env =
 
 export const BaseURL =
   env === "uat"
-    ? "https://saas.uat.in.gateway.musafirbiz.com"
+    ? "https://saas.qa.gateway.musafirbiz.com"
     : env === "qa"
     ? "https://saas.qa.gateway.musafirbiz.com"
     : env === "development"
     ? "https://saas.qa.gateway.musafirbiz.com"
     : env === "production"
-    ? "https://saas.uat.in.gateway.musafirbiz.com"
-    : "https://saas.uat.in.gateway.musafirbiz.com";
+    ? "https://saas.qa.gateway.musafirbiz.com"
+    : "https://saas.qa.gateway.musafirbiz.com";
 
 export const loginBaseURL =
   env === "uat"
