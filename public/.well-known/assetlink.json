@@ -1,0 +1,16 @@
+[
+    {
+        "relation": [
+            "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+            "namespace": "android_app",
+            "package_name": "Musafir.SAAS.App",
+            "sha256_cert_fingerprints": [
+                "8F:E6:18:B1:2A:62:BA:0A:F5:05:5E:FC:E6:CC:89:69:16:FD:C2:25:1B:BF:AF:81:7F:18:BB:9B:F2:4C:A8:9A",
+                "3d:ea:87:3b:06:7c:54:1d:ab:58:5d:42:8c:7e:dc:b3:e0:ca:14:e9:7b:04:20:89:50:f8:d2:39:cc:51:02:0c",
+                "27:E8:10:3E:30:D2:9D:85:84:57:9A:34:54:D9:90:F5:E0:9A:F4:F3:BA:83:6E:9E:E6:9F:46:9C:3F:40:E9:25"
+            ]
+        }
+    }
+]
